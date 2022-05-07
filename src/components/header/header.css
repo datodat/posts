@@ -1,0 +1,28 @@
+.header {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  background-color: #919191;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
+  z-index: 10;
+}
+
+.header p {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.header div {
+  display: flex;
+}
+.header div a {
+  padding: 14px 18px;
+  font-size: 18px;
+  text-decoration: none;
+}

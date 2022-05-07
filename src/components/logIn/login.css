@@ -1,0 +1,123 @@
+.login {
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  /* background: linear-gradient(61deg, #141313, #2c3e4f); */
+}
+
+.form-div form {
+  padding: 30px;
+  width: 500px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  background-color: #eee;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 5px 5px 0px rgba(50, 50, 50, 0.2);
+}
+
+.form-div h4 {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  color: #141313;
+  text-transform: uppercase;
+}
+
+.form-div form > div {
+  width: 100%;
+  margin-top: 25px;
+  position: relative;
+}
+
+.form-div input {
+  width: 100%;
+  padding: 18px;
+  border: 1px solid;
+  border-radius: 4px;
+  font-size: 18px;
+}
+.form-div input:focus {
+  outline: none;
+}
+.error-p {
+  color: #fa3b3b;
+  font-size: 14px;
+  font-style: italic;
+
+  position: absolute;
+  bottom: -20px;
+  left: 20px;
+}
+
+.form-div button {
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 22px;
+  box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.submit-btn {
+  margin-top: 26px;
+  font-weight: 700;
+  text-transform: capitalize;
+  background-color: #3fc449;
+  color: #eee;
+}
+
+.change-btn {
+  margin-top: 10px;
+  background-color: #6b80ff;
+  color: #eee;
+}
+
+@media screen and (max-width: 600px) {
+  .form-div {
+    width: 90%;
+  }
+  .form-div form {
+    width: 100%;
+  }
+  .form-div form input {
+    padding: 14px;
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .form-div {
+    width: 95%;
+  }
+  .form-div form {
+    padding: 10px;
+  }
+  .form-div form input {
+    padding: 10px;
+    font-size: 12px;
+  }
+  .error-p {
+    font-size: 10px;
+    bottom: -15px;
+  }
+
+  .submit-btn {
+    margin-top: 20px;
+    font-size: 14px !important;
+    padding: 6px;
+  }
+  .change-btn {
+    font-size: 14px !important;
+    padding: 6px;
+  }
+}
