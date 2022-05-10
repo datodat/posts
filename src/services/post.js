@@ -1,9 +1,9 @@
 import axios from 'axios';
-const baseUrl = '/api/posts';
+const baseUrl = 'http://localhost:3001/api/posts';
 
 const getAll = async () => {
-  const response = axios.get(baseUrl);
-  return (await response).data;
+  const response = await axios.get(baseUrl);
+  return response.data;
 }
 
 const create = async (obj, config) => {
@@ -11,4 +11,14 @@ const create = async (obj, config) => {
   return response.data;
 }
 
-export default { getAll, create }
+const update = async (id, obj) => {
+  const response = await axios.put(`${baseUrl}/${id}`, obj);
+  return response.data;
+}
+
+const deletePost = async id => {
+  const response = await axios.delete(`${baseUrl}/${id}`);
+  return response.data;
+}
+
+export default { getAll, create, update, deletePost } //eslint-disable-line

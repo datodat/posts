@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 // Css
 import './App.css';
@@ -15,6 +15,9 @@ import loginService from './services/login';
 const App = () => {
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState(null);
+
+  const postRef = useRef();
+  const loginRef = useRef();
 
   useEffect(() => {
     postService
@@ -38,23 +41,24 @@ const App = () => {
         .then(res => {
           window.localStorage.removeItem('user');
           window.localStorage.setItem('user', JSON.stringify(res));
-          setUser(res)
+          setUser(res);
         })
-        .catch(() => alert('Username or password incorrect!'))
+        .catch(() => loginRef.current.handleError('Invalid username or password'))
   }
 
   // Sign up handler
   const signupHandler = (obj) => {
     userService
       .signUp(obj)
-        .then(res => console.log(res))
-        .catch(() => alert('Username already exsits!'))
+        .then(() => loginRef.current.handleSuccess('Registered successfully, please log in'))
+        .catch(() => loginRef.current.handleError('Username already exsits'));
   }
 
   // Log out handler
   const logOut = () => {
     setUser(null);
     window.localStorage.removeItem('user');
+    postRef.current.closeEdit();
   }
 
   // Add new post
@@ -66,7 +70,30 @@ const App = () => {
 
     postService
       .create(obj, config)
-        .then(res => setPosts(posts.concat(res)))
+        .then(() => {
+          postService
+            .getAll()
+              .then(res => setPosts(res))
+              .catch(error => console.log(error))
+        })
+        .catch(error => console.log(error))
+  }
+
+  // Edit post
+  const editHandler = (obj, id) => {
+    postService
+      .update(id, obj)
+        .then(res => {
+          setPosts(posts.map(i => i.id === id ? res : i))
+        })
+        .catch(error => console.log(error))
+  }
+
+  // Delete post
+  const deleteHandler = id => {
+    postService
+      .deletePost(id)
+        .then(() => setPosts(posts.filter(i => i.id !== id)))
         .catch(error => console.log(error))
   }
 
@@ -83,11 +110,12 @@ const App = () => {
             <LogIn 
               loginHandler={loginHandler} 
               signupHandler={signupHandler} 
+              ref={loginRef}
             />} 
           />
           {/* Profile route, is user is not logged in redirect to log-in */}
           <Route path='/profile' element={user ? 
-            <Profile /> : 
+            <Profile formHandler={formHandler} /> : 
             <Navigate replace to="/login" />} 
           />
           {/* Home */}
@@ -97,7 +125,9 @@ const App = () => {
             <Home 
               user={user} 
               posts={posts}
-              formHandler={formHandler} 
+              editPostHandler={editHandler}
+              deleteHandler={deleteHandler}
+              refForPost={postRef}
             />} 
           />
         </Routes>

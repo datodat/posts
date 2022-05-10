@@ -1,14 +1,37 @@
 .post-card {
-  width: 100%;
+  width: 60%;
   height: auto;
   padding: 20px 14px;
   border: none;
   border-radius: 6px;
   background-color: #fff;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 4px 4px 0px rgba(100, 100, 100, 0.2);
   margin-top: 20px;
   overflow: hidden;
 }
+.post-card input {
+  width: 100%;
+  padding: 14px;
+  margin-top: 14px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  text-align: center;
+}
+.post-card input:focus {
+  outline: none;
+}
+.post-card textarea {
+  width: 100%;
+  padding: 14px;
+  margin-top: 14px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  resize: none;
+}
+.post-card textarea:focus {
+  outline: none;
+}
+
 .post-card > h3 {
   font-size: 22px;
   font-weight: 700;
@@ -16,13 +39,32 @@
   text-align: center;
 }
 .post-card > p {
+  margin-top: 8px;
   font-size: 16px;
   font-weight: 400;
   word-wrap: break-word;
   color: #454545;
+  background-color: #eee;
+  border-radius: 4px;
+  padding: 12px 50px;
 }
-.post-card > button {
-  margin-top: 14px;
+.like-more-div {
+  width: 100%;
+
+  padding: 12px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.like-btn {
+  border: none;
+  border-radius: 4px;
+  background-color: #0102da;
+  padding: 4px;
+  color: #eee;
+  cursor: pointer;
+}
+.more-hide-btn {
   border: none;
   background: none;
   font-size: 14px;
@@ -64,4 +106,29 @@
 }
 .btn-delete {
   background-color: #ff0313;
+}
+
+@media screen and (max-width: 800px) {
+
+  .post-card {
+    width: 80%;
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+
+  .post-card {
+    width: 95%;
+  }
+
+}
+
+@media screen and (max-width: 480px) {
+
+  .post-card > p {
+    font-size: 12px;
+    padding: 6px 30px;
+  }
+
 }

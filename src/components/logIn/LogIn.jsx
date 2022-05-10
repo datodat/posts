@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, forwardRef, useImperativeHandle } from 'react';
 // Helper
 import { usernameValidator, nameValidator, passwordValidator } from './helper';
 import './login.css';
 
-const LogIn = ({ loginHandler, signupHandler }) => {
+const LogIn = forwardRef(({ loginHandler, signupHandler }, ref) => {
   const [switchSignup, setSwitchSignup] = useState(false);
 
   const [username, setUsername] = useState('');
@@ -13,6 +13,35 @@ const LogIn = ({ loginHandler, signupHandler }) => {
   const [usernameError, setUsernameError] = useState('');
   const [nameError, setNameError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+
+  const [notification, setNotification] = useState('');
+  const [notificationClass, setNotificationClass] = useState('');
+
+  useImperativeHandle(ref, () => {
+    return {
+      handleSuccess,
+      handleError
+    }
+  })
+
+  const handleSuccess = (text) => {
+    setNotification(text);
+    setNotificationClass('text-success')
+    setTimeout(() => {
+      setNotification('');
+      setNotificationClass('');
+      setSwitchSignup(!switchSignup);
+    }, 3000)
+  }
+
+  const handleError = (text) => {
+    setNotification(text);
+    setNotificationClass('text-error');
+    setTimeout(() => {
+      setNotification('');
+      setNotificationClass('');
+    }, 3000)
+  }
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -89,6 +118,7 @@ const LogIn = ({ loginHandler, signupHandler }) => {
       <div className='form-div'>
         <form onSubmit={handleLogin}>
           <h4>Log In</h4>
+          {notification && <p className={notificationClass}>{notification}</p>}
           <div>  
             <input
               style={{ borderColor: usernameError ? '#fa3b3b' : '#919191' }}
@@ -137,6 +167,7 @@ const LogIn = ({ loginHandler, signupHandler }) => {
       <div className='form-div'>
         <form onSubmit={handleSignup}>
           <h4>Sign Up</h4>
+          {notification && <p className={notificationClass}>{notification}</p>}
           <div>  
             <input
               style={{ borderColor: usernameError ? '#fa3b3b' : '#919191' }}
@@ -197,6 +228,6 @@ const LogIn = ({ loginHandler, signupHandler }) => {
       {switchSignup ? signupForm() : loginForm()}
     </div>
   );
-}
+})
 
 export default LogIn;

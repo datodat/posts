@@ -3,91 +3,9 @@
   min-height: 100vh;
 
   display: flex;
-}
-
-.home-left {
-  flex: 1;
-  min-height: 100vh;
-  overflow: scroll;
-
-  padding: 100px 10px 10px 10px;
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-}
 
-.home-right {
-  flex: 1;
-  max-height: 100vh;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.phone-form-div {
-  width: 70%;
-  padding: 18px;
-  border: none;
-  border-radius: 6px;
-  background-color: #fff;
-  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.3);
-}
-.phone-form-div form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.phone-form-div form h4 {
-  color: #212121;
-  font-size: 22px;
-}
-.error {
-  font-size: 14px;
-  font-style: italic;
-  color: #fa3b3b;
-  position: absolute;
-  bottom: -20px;
-  left: 20px;
-}
-.phone-form-div form div {
-  width: 100%;
-  position: relative;
-}
-.phone-form-div form input {
-  width: 100%;
-  padding: 18px 18px 18px 24px;
-  margin-top: 12px;
-
-  font-size: 18px;
-  border: 1px solid;
-  border-radius: 4px;
-}
-.phone-form-div form input:focus,
-.phone-form-div form textarea:focus {
-  outline: none;
-}
-.phone-form-div form textarea {
-  width: 100%;
-  min-height: 200px;
-  margin-top: 24px;
-  padding: 18px;
-  font-size: 16px;
-  resize: none;
-  border: 1px solid;
-  border-radius: 4px;
-}
-
-.phone-form-div form button {
-  width: 100%;
-  margin-top: 28px;
-  padding: 18px;
-  font-size: 20px;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 4px;
-  background-color: #24ffa1;
-  cursor: pointer;
+  padding: 100px 10px 50px 10px;
 }

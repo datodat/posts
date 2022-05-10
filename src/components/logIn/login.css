@@ -32,6 +32,15 @@
   text-transform: uppercase;
 }
 
+.text-success {
+  color: #15640e;
+  font-size: 18px;
+}
+.text-error {
+  color: #ff3b3b;
+  font-size: 18px;
+}
+
 .form-div form > div {
   width: 100%;
   margin-top: 25px;
