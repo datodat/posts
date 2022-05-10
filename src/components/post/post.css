@@ -39,14 +39,26 @@
   text-align: center;
 }
 .post-card > p {
+  position: relative;
+  overflow: hidden;
   margin-top: 8px;
   font-size: 16px;
   font-weight: 400;
   word-wrap: break-word;
-  color: #454545;
+  color: #727272;
   background-color: #eee;
   border-radius: 4px;
   padding: 12px 50px;
+}
+.post-card > p > button {
+  position: absolute;
+  bottom: 1px;
+  right: 3px;
+  border: none;
+  background: none;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
 }
 .like-more-div {
   width: 100%;

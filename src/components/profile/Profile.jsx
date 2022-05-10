@@ -1,14 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // Css
 import './profile.css';
+// Component
+import Post from '../post/Post';
 
-const Profile = ({ formHandler }) => {
+const Profile = ({ posts, user, formHandler, editPostHandler, deleteHandler, refForProfile }) => {
+  // Adding new post
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-
+  // Validate post
   const [titleError, setTitleError] = useState('');
   const [contentError, setContentError] = useState('');
+  // User's posts
+  const [userPosts, setUserPosts] = useState([]);
 
+  useEffect(() => {
+    if(posts.length > 0 && user !== null){
+      setUserPosts(posts.filter(i => i.author.username === user.username ));
+    }else{
+      setUserPosts([]);
+    }
+  }, [posts]) //eslint-disable-line
 
   const handlePost = (e) => {
     e.preventDefault();
@@ -35,10 +47,7 @@ const Profile = ({ formHandler }) => {
 
   return (
     <div className='profile'>
-      <div className="profile-left">
-
-      </div>
-      <div className="profile-right">
+      <div className="profile-form-div">
         <div className='post-form-div'>
           <form onSubmit={handlePost}>
             <h4>Add new post</h4>
@@ -69,6 +78,22 @@ const Profile = ({ formHandler }) => {
             </button>
           </form>
         </div>
+      </div>
+      {/*  */}
+      <div className='profile-posts'>
+        <h4>My posts</h4>
+        {userPosts.length > 0 && userPosts.map(i => {
+          return (
+            <Post 
+              key={i.id}
+              data={i}
+              user={user}
+              editPostHandler={editPostHandler}
+              deleteHandler={deleteHandler}
+              ref={refForProfile}
+            />
+          );
+        })}
       </div>
     </div>
   );

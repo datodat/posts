@@ -6,9 +6,49 @@
   font-family: 'Poppins', sans-serif;
 }
 
+body::-webkit-scrollbar {
+  width: 5px;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #313131;
+}
+body::-webkit-scrollbar-track {
+  background-color: #999999;
+}
+
 .container {
   width: 100%;
   min-height: 100vh;
 
   background-color: #eee;
+}
+
+.go-top-btn {
+  position: fixed;
+  left: 20px;
+  bottom: 50px;
+  background-color: #444;
+  color: #eee;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  z-index: 20;
+}
+.go-top-btn:hover {
+  background-color: #777;
+}
+
+@media screen and (max-width: 450px) {
+  .go-top-btn {
+    width: 25px;
+    height: 25px;
+    bottom: 30px;
+    left: 15px;
+    font-size: 14px;
+  }
 }

@@ -16,9 +16,23 @@ const App = () => {
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState(null);
 
+  const [goTop, setGoTop] = useState(true);
+
   const postRef = useRef();
   const loginRef = useRef();
 
+  // Window scroll listener
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 400){
+        setGoTop(true);
+      }else{
+        setGoTop(false);
+      }
+    })
+  }, [])
+
+  // Get posts from server every first render
   useEffect(() => {
     postService
       .getAll()
@@ -33,6 +47,14 @@ const App = () => {
       setUser(JSON.parse(storageUser));
     }
   }, [])
+
+  // Go tob btn handler when scrolling
+  const goToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }
 
   // Log in handler
   const loginHandler = (obj) => {
@@ -99,9 +121,19 @@ const App = () => {
 
   return (
     <div className='container'>
+      <div 
+        className='go-top-btn' 
+        style={{ display: goTop ? 'flex' : 'none' }}
+        onClick={goToTop}
+      >
+        <i className="fa-solid fa-arrow-up"></i>
+      </div>
       <Router>
         {/* Header */}
-        <Header user={user} logOut={logOut} />
+        <Header 
+          user={user} 
+          logOut={logOut} 
+        />
 
         <Routes>
           {/* Log-in route, if user is already logged in redirect to profile */}
@@ -115,7 +147,14 @@ const App = () => {
           />
           {/* Profile route, is user is not logged in redirect to log-in */}
           <Route path='/profile' element={user ? 
-            <Profile formHandler={formHandler} /> : 
+            <Profile 
+              posts={posts}
+              user={user} 
+              formHandler={formHandler}
+              editPostHandler={editHandler}
+              deleteHandler={deleteHandler}
+              refForProfile={postRef}
+            /> : 
             <Navigate replace to="/login" />} 
           />
           {/* Home */}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react'
+import { useState, useEffect, forwardRef, useImperativeHandle } from 'react'
 // Css
 import './post.css';
 
@@ -7,8 +7,12 @@ const Post = forwardRef(({ data, user, editPostHandler, deleteHandler }, ref) =>
   const [showEdit, setShowEdit] = useState(false);
   const [enableEdit, setEnableEdit] = useState(false);
 
+  // Edited title and content
   const [newTitle, setNewTitle] = useState('');
   const [newContent, setNewContent] = useState('');
+
+  // Show post content full height
+  const [seeMore, setSeeMore] = useState(false);
 
   useImperativeHandle(ref, () => {
     return {
@@ -27,6 +31,7 @@ const Post = forwardRef(({ data, user, editPostHandler, deleteHandler }, ref) =>
     setShowEdit(false);
   }
 
+  // Edit
   const handleEdit = () => {
     if(newTitle !== '' || newContent !== ''){
       const obj = {
@@ -45,6 +50,7 @@ const Post = forwardRef(({ data, user, editPostHandler, deleteHandler }, ref) =>
     }
   }
 
+  // Like
   const handleLike = () => {
     const newObj = {
       title: data.title,
@@ -71,7 +77,12 @@ const Post = forwardRef(({ data, user, editPostHandler, deleteHandler }, ref) =>
           value={newContent} 
           onChange={({ target }) => setNewContent(target.value)} 
         /> :
-        <p>{data.content}</p>
+        <p style={{ maxHeight: seeMore ? '' : '150px' }}>
+          {data.content}
+          <button onClick={() => setSeeMore(!seeMore)}>
+            {seeMore ? 'See less' : 'See more'}
+          </button>
+        </p>
       }
       <div className='like-more-div'>
         <button className='like-btn' onClick={handleLike}>

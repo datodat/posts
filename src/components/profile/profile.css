@@ -3,22 +3,18 @@
   min-height: 100vh;
   
   display: flex;
+  flex-direction: column;
 }
 
-.profile-left {
-  flex: 1;
-}
-
-.profile-right {
-  flex: 1;
-
+.profile-form-div {
+  padding-top: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .post-form-div {
-  width: 70%;
+  width: 50%;
   padding: 18px;
   border: none;
   border-radius: 6px;
@@ -81,4 +77,28 @@
   border-radius: 4px;
   background-color: #24ffa1;
   cursor: pointer;
+}
+
+.profile-posts {
+  width: 100%;
+  padding: 50px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile-posts > h4 {
+  font-size: 22px;
+  color: #212121;
+}
+
+@media screen and (max-width: 800px) {
+  .post-form-div {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .post-form-div {
+    width: 90%;
+  }
 }

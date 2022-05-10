@@ -4,16 +4,17 @@ import { usernameValidator, nameValidator, passwordValidator } from './helper';
 import './login.css';
 
 const LogIn = forwardRef(({ loginHandler, signupHandler }, ref) => {
+  // Switch sign up - log in
   const [switchSignup, setSwitchSignup] = useState(false);
 
   const [username, setUsername] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
-
+  // Error notifications in input
   const [usernameError, setUsernameError] = useState('');
   const [nameError, setNameError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-
+  // Notifications after submit
   const [notification, setNotification] = useState('');
   const [notificationClass, setNotificationClass] = useState('');
 

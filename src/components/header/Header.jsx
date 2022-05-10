@@ -13,6 +13,7 @@ const Header = ({ user, logOut }) => {
     }
   })
 
+  // Log out
   const logOutHandler = () => {
     logOut();
     setShowNav(false);
@@ -43,17 +44,30 @@ const Header = ({ user, logOut }) => {
       >
         <ul>
           <li>
-            <Link onClick={() => setShowNav(false)} to='/'>Home</Link>
+            <Link onClick={() => setShowNav(false)} to='/'>
+              Home
+            </Link>
           </li>
           <li>
             {/* My profile link if user is logged in, else Log in link */}
             {user ? 
-              <Link onClick={() => setShowNav(false)} to='/profile'>My Profile</Link> : 
-              <Link onClick={() => setShowNav(false)} className='log-in' to='login'>Log in</Link>}
+              <Link onClick={() => setShowNav(false)} to='/profile'>
+                My Profile
+                <i style={{ marginLeft: '5px' }} className="fa-solid fa-user"></i>  
+              </Link> : 
+              <Link onClick={() => setShowNav(false)} className='log-in' to='login'>
+                Log in
+                <i style={{ marginLeft: '5px' }} className="fa-solid fa-arrow-right-to-bracket"></i>
+              </Link>}
           </li>
             {/* Log out button if user is logged in */}
           <li>
-            {user && <Link className='log-out' to='/' onClick={logOutHandler}>Log out</Link>}
+            {user && 
+              <Link className='log-out' to='/' onClick={logOutHandler}>
+                Log out
+                <i style={{ marginLeft: '5px' }} className="fa-solid fa-arrow-right-from-bracket"></i>
+              </Link>
+            }
           </li>
         </ul>
       </nav>
